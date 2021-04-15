@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <head>
+        <title><%= user%></title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    </head>
+    <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+      
     <% var i,j,temparray,chunk = 4; %>
     <% j=list.length %>
     <% for (i=0; i<j; i+=chunk) { %>
     <%    temparray = list.slice(i,i+chunk); %>
         <div class="card-group">
             <%    temparray.forEach(function(item){ %>
-            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                <div class="card-header"><%= item.name %></div>
+            <div class="card mx-auto text-white bg-info mb-3" style="max-width: 18rem;">
+                <div class="d-flex justify-content-center card-header">
+                    <h3 class="mx-auto"><%= item.name %></h3>
+                    <form action=<%= user + "/del/" + item.id %> method="POST">
+                        <button action="submit" class="btn-xs btn-danger">X</button>
+                    </form>
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">Description</h5>
                     <p class="card-text"><%= item.description %></p>
@@ -60,3 +74,13 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+<style>
+    html,body{
+    background-image: url('https://getwallpapers.com/wallpaper/full/8/d/6/1523445-gorgerous-hd-wallpaper-1440x900-2560x1440.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    }
+</style>

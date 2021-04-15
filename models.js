@@ -9,16 +9,17 @@ if(!db)
 
 // Schemas 
 const UserSchema = {
-    name : String , 
-    password : String ,
-    token : String ,
+    name : {type: String , required:true} , 
+    password : {type: String , required:true} ,
+    token : {type: String } ,
 }
 
 const TaskSchema = {
-    user : String ,
-    name : String ,
-    description : String ,
-    Time : String ,
+    id : {type: Number , required:true} ,
+    user : {type: String , required:true} ,
+    name : {type : String , required:true} ,
+    description : {type : String , required:true} ,
+    Time : {type:String} ,
 }
 
 // Models 

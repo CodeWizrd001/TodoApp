@@ -58,7 +58,23 @@ router.post('/signup',async function(req,res,next){
 
 router.post('/:user/add',async function(req,res,next){
   var username = req.params.user;
-  res.redirect(username) ; 
+  var tempTask = Task({
+    id:await Task.count() ,
+    name : req.body.name ,
+    description : req.body.description ,
+    user : username ,
+  })
+  tempTask.save() ;
+  res.redirect("/users/"+username) ; 
+}) ;
+
+router.post('/:user/del/:id',async function(req,res,next){
+  var username = req.params.user ;
+  await Task.findOneAndRemove({
+    user:req.params.user ,
+    id : req.params.id ,
+  }) ;
+  res.redirect("/users/"+username) ; 
 }) ;
 
 module.exports = router;
