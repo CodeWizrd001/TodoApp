@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <% var i,j,temparray,chunk = 4; %>
+    <% j=list.length %>
+    <% for (i=0; i<j; i+=chunk) { %>
+    <%    temparray = list.slice(i,i+chunk); %>
+        <div class="card-group">
+            <%    temparray.forEach(function(item){ %>
+            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <div class="card-header"><%= item.name %></div>
+                <div class="card-body">
+                    <h5 class="card-title">Description</h5>
+                    <p class="card-text"><%= item.description %></p>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    <% } %>    
+    <div class="card-group">
+        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+            <div class="card-header">Add New Task</div>
+            <div class="d-flex justify-content-center text-danger font-weight-bold card-body">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <i class="bi bi-journal-plus">+</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add New Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="addTask" action=<%= user + "/add" %> method="POST">
+                    <div class="form-group">
+                      <label for="name">Task Name</label>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="Enter Task Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Task Description</label>
+                        <input type="text" class="form-control" id="desc" name="description" placeholder="Enter Task Description">
+                    </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" form="addTask" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
