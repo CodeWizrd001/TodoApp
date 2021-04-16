@@ -1,5 +1,63 @@
 # CSEA Workshop 2021 - NodeJS + Docker
 
+## MongoDB initial setup :
+
+### Add admin user : 
+```
+ db.createUser({
+    user: "admin",
+    pwd: "admin",
+    roles: [ 
+      { role: "userAdminAnyDatabase", db: "admin" }, 
+      "readWriteAnyDatabase"
+     ]
+  })
+```
+### Enable authentication in mongo config
+
+```
+sudo vim /etc/mongod.conf
+```
+
+Scroll down to find the commented-out security section:
+
+```
+. . .
+#auth:true
+. . .
+```
+
+Uncomment this line by removing the pound sign (#):
+
+```
+. . .
+auth:true
+. . .
+```
+
+
+### Restart the mongo daemon:
+````
+sudo systemctl restart mongod
+````
+
+### Log into mongo as admin:
+````
+mongo -u admin -p --authenticationDatabase admin
+````
+
+### Add database and user for our project:
+
+````
+ db.createUser({
+    user: "test",
+    pwd: "test",
+    roles: [
+      { role: 'readWrite', db: "test_db" }
+    ]
+  })
+````
+
 ## Running without docker
 
 ### Step 1 - Node Modules
@@ -48,3 +106,5 @@ To run it in background :
 
 
 It will start the Node back end server at http://localhost:3060
+
+
